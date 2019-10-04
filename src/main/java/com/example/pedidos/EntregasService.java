@@ -20,7 +20,10 @@ public class EntregasService {
 	
 	@Autowired
     EntregaRepository entregaRepository;
-
+	
+	@Autowired
+	PedidosService pedidoServico;
+	
     public List<Entregas> getAllEntregas() {
         List<Entregas> persons = new ArrayList<Entregas>();
         entregaRepository.findAll().forEach(person -> persons.add(person));
@@ -32,14 +35,11 @@ public class EntregasService {
     }
 
     public void saveOrUpdate(int pedidoId) {
-    	System.out.println(pedidoId);
-    	PedidosService pedidoServico = new PedidosService();
     	
     	Pedidos pedido = pedidoServico.getPedidoById(pedidoId);
     	
     	Entregas entrega = new Entregas();
     	
-    	entrega.setId(pedidoId);
     	entrega.setId_pedido(pedidoId);
     	entrega.setEndereco(pedido.getEndereco());
     	
